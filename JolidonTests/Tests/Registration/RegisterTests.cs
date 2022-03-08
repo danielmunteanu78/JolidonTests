@@ -6,6 +6,7 @@ using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace JolidonTests.Tests
 {
@@ -20,8 +21,8 @@ namespace JolidonTests.Tests
         {
             driver.Navigate().GoToUrl(url + "/customer/account/create/");
             RegisterPage rp = new RegisterPage(driver);
-            Assert.AreEqual("CREAZA CONT CLIENT NOU", rp.CheckPage());
-            rp.AcceptCookies();
+            Assert.AreEqual("CREAZA CONT CLIENT NOU", rp.CheckPage());            
+            rp.AcceptCookies();            
             rp.Register("aaaa","bbbb" ,"aaaa@bbbb.com","1234");
         }       
 

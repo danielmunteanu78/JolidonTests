@@ -93,6 +93,33 @@ namespace JolidonTests.Utilities
                         throw new BrowserTypeException(browserType.ToString());
                     }
             }
+        } 
+        public static IWebDriver GetDriver()
+        {
+            WebBrowsers cfgBrowser;
+            switch(FrameworkConstants.configBrowser.ToUpper())
+            {
+                case "FIREFOX":
+                    {
+                        cfgBrowser = WebBrowsers.Firefox;
+                        break;
+                    }
+                case "CHROME":
+                    {
+                        cfgBrowser = WebBrowsers.Chrome;
+                        break;
+                    }
+                case "EDGE":
+                    {
+                        cfgBrowser = WebBrowsers.Edge; 
+                        break;
+                    }
+                default:
+                    {
+                        throw new BrowserTypeException(String.Format("Browser {0} not supported !", FrameworkConstants.configBrowser));
+                    }                    
+            }
+            return GetDriver(cfgBrowser);
         }
 
     }

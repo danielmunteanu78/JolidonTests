@@ -18,6 +18,7 @@ namespace JolidonTests.POM
         const string rememberPassSelector = "remember_meLEGWAfWXsV"; // id
         const string createAccountBtn = "#form-validate > div > div.primary > button > span"; //css
         const string cookieAcceptSelector = "#html-body > div.amgdprcookie-bar-template > div > div > div > button.amgdprcookie-button.-allow"; //css
+        
 
         public RegisterPage(IWebDriver driver) : base(driver)
         {

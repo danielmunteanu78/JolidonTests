@@ -15,7 +15,7 @@ namespace JolidonTests.Tests
         [SetUp]
         public void Setup()
         {
-            driver = Browsers.GetDriver(WebBrowsers.Edge);
+            driver = Browsers.GetDriver();
         }
 
         [TearDown]

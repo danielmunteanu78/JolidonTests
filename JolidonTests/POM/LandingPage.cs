@@ -8,7 +8,7 @@ namespace JolidonTests.POM
     public class LandingPage : BasePage
     {
         const string authButtonSelector = "#html-body > div.page-wrapper > div.header-placeholder > div.page-header.page-header-v4 > header > div.panel.wrapper > div > ul.header.links > li.link.authorization-link > a"; // css
-        const string createAccButtonSelector = "idFUo9Ps1r"; // id
+        const string createAccButtonSelector = "authorization-link"; //class
         const string myCartSelector = "#html-body > div.page-wrapper > div.header-placeholder > div.page-header.page-header-v4 > header > div.panel.wrapper > div > div > div.minicart-wrapper.quickcart-wrapper.minicart-weltpixel > a"; // css
         const string myCartAreaSelector = "quickcart-top"; // class
         const string searchSelector = "#html-body > div.page-wrapper > div.header-placeholder > div.page-header.page-header-v4 > header > div.panel.wrapper > div > div > div.block.block-search.search-visible-md.minisearch-v2 > div > i"; // css
@@ -30,7 +30,7 @@ namespace JolidonTests.POM
 
         public void CreateAccount()
         {
-            var createAccButton = driver.FindElement(By.Id(createAccButtonSelector));
+            var createAccButton = driver.FindElement(By.ClassName(createAccButtonSelector));
             createAccButton.Click();
         }
 
