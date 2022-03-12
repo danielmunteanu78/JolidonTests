@@ -1,8 +1,11 @@
-﻿using NUnit.Framework;
+﻿using AventStack.ExtentReports;
+using Microsoft.VisualBasic.FileIO;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -53,6 +56,12 @@ namespace JolidonTests
             ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(finalFilePath, format);
         }
 
+        public static MediaEntityModelProvider CaptureScreenShot(IWebDriver driver, string name)
+        {
+            var screenShot = ((ITakesScreenshot)driver).GetScreenshot().AsBase64EncodedString;
+            return MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenShot, name).Build();
+        }
+
         public static void ExecuteJsScript(IWebDriver driver, string script)
         {
             var jsExecutor = (IJavaScriptExecutor)driver;
@@ -79,5 +88,44 @@ namespace JolidonTests
             var lines = File.ReadAllLines(path).Select(a => a.Split(',')).Skip(1);
             return lines.ToArray();
         }
+
+        public static DataTable GetDataTableFromCSV(string csv)
+        {
+            DataTable dataTable = new DataTable();
+            try
+            {
+                using (TextFieldParser csvReader = new TextFieldParser(csv))
+                {
+                    csvReader.SetDelimiters(new string[] { ","});
+                    csvReader.HasFieldsEnclosedInQuotes = true;
+                    string[] columnNames = csvReader.ReadFields();
+                    foreach(string column in columnNames)
+                    {
+                        DataColumn dataColumn = new DataColumn();
+                        dataColumn.AllowDBNull = true;
+                        dataTable.Columns.Add(dataColumn);
+                    }
+
+                    while (!csvReader.EndOfData)
+                    {
+                        string[] rowValues = csvReader.ReadFields();
+                        for(int i=0; i< rowValues.Length; i++)
+                        {
+                            if(rowValues[i] == " ")
+                            {
+                                rowValues[i] = null;
+                            }
+                        }
+                        dataTable.Rows.Add(rowValues);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(String.Format("Could not read from csv file {0}", csv));
+            }
+            return dataTable;
+        } 
+
     }
 }

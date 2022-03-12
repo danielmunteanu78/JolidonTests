@@ -10,20 +10,36 @@ using System.Threading;
 
 namespace JolidonTests.Tests
 {
+    
     class RegisterTests : BaseTest
     {
         
-        string url = FrameworkConstants.GetUrl();       
+        string url = FrameworkConstants.GetUrl();
 
-        [Test]
-
-        public void RegisterTest()
+        private static IEnumerable<TestCaseData> GetCredentialsDataCsv()
         {
-            driver.Navigate().GoToUrl(url + "/customer/account/create/");
-            RegisterPage rp = new RegisterPage(driver);
-            Assert.AreEqual("CREAZA CONT CLIENT NOU", rp.CheckPage());            
+            var csvData = Utils.GetDataTableFromCSV("TestData\\regcredentials.csv");
+            for (int i = 0; i < csvData.Rows.Count; i++)
+            {
+                yield return new TestCaseData(csvData.Rows[i].ItemArray);
+            }
+        }
+
+        [Category("RegisterWithDb"),Category("Name")]
+        [Test,TestCaseSource("GetCredentialsDataCsv"),Order(1)]
+        //[Parallelizable(ParallelScope.Self)]
+
+        public void RegisterTest(string firstName, string lastName, string email, string password)
+        {
+            _driver.Navigate().GoToUrl(url + "/customer/account/create/");
+            RegisterPage rp = new RegisterPage(_driver);
+
+            Assert.AreEqual("CREAZA CONT CLIENT NOU", rp.CheckPage());
+            Thread.Sleep(1000);
             rp.AcceptCookies();            
-            rp.Register("aaaa","bbbb" ,"aaaa@bbbb.com","1234");
+            rp.Register(firstName,lastName,email,password);
+            testName = TestContext.CurrentContext.Test.Name;
+            _test = _extent.CreateTest(testName);
         }       
 
     }

@@ -14,42 +14,54 @@ namespace JolidonTests.Tests
 
         string url = FrameworkConstants.GetUrl();        
 
+        [Category("Smoke")]
         [Test]
+       // [Parallelizable(ParallelScope.Self)]
         public void LoginTest()
         {
-            driver.Navigate().GoToUrl(url);
-            LandingPage lp = new LandingPage(driver);
+            _driver.Navigate().GoToUrl(url);
+            LandingPage lp = new LandingPage(_driver);
             lp.AcceptCookies();
             lp.LoginNavigate();
+            //testName = TestContext.CurrentContext.Test.Name;
+           // _test = _extent.CreateTest(testName);
         }
 
+        [Category("Smoke")]
         [Test]
+       // [Parallelizable(ParallelScope.Self)]
 
         public void CreateAccountTest()
         {
-            driver.Navigate().GoToUrl(url);
-            LandingPage lp = new LandingPage(driver);
+            _driver.Navigate().GoToUrl(url);
+            LandingPage lp = new LandingPage(_driver);
             lp.AcceptCookies();
-            lp.CreateAccount();
+            lp.CreateAccount();            
         }
 
+        [Category("Smoke")]
         [Test]
+        //[Parallelizable(ParallelScope.Self)]
 
         public void CartTest()
         {
-            driver.Navigate().GoToUrl(url);
-            LandingPage lp = new LandingPage(driver);
+            _driver.Navigate().GoToUrl(url);
+            LandingPage lp = new LandingPage(_driver);
             lp.AcceptCookies();
             lp.MyCart();
-          //  Assert.AreEqual("Cosul meu", lp.CheckCartPage());
+            //  Assert.AreEqual("Cosul meu", lp.CheckCartPage());           
+            
         }
+
+        [Category("Smoke")]
         [Test]
+       // [Parallelizable(ParallelScope.Self)]
         public void SelectTest()
         {
-            driver.Navigate().GoToUrl(url);
-            LandingPage lp = new LandingPage(driver);
+            _driver.Navigate().GoToUrl(url);
+            LandingPage lp = new LandingPage(_driver);
             lp.AcceptCookies();
-            lp.SearchPage();
+            lp.SearchPage();            
         }        
     }
 }

@@ -29,7 +29,9 @@ namespace JolidonTests.Utilities
                         if (FrameworkConstants.ignoreCertErr)
                         {
                             options.AddArgument("ignore-certificate-errors");
-                        }                        
+                        }
+
+                        options.AddArgument("no-sandbox");
                         var proxy = new Proxy
                         {
                             HttpProxy = FrameworkConstants.browserProxy,
