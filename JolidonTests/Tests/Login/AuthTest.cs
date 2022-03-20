@@ -14,24 +14,7 @@ namespace JolidonTests.Tests
 {
     class AuthTest : BaseTest
     {       
-        string url = FrameworkConstants.GetUrl();
-
-       /* private static IEnumerable <TestCaseData> GetCredentialsData()
-            {
-                 yield return new TestCaseData(" user1", "pass1");
-                 yield return new TestCaseData(" user2", "pass2");
-                 yield return new TestCaseData(" user3", "pass3");
-                 yield return new TestCaseData(" user4", "pass4");
-            }*/
-
-        /*private static IEnumerable<TestCaseData> GetCredentialsDataCsv()
-        {
-            foreach (var values in Utils.GetGenericData("TestData\\credentials.csv"))
-            {
-                yield return new TestCaseData(values);
-            }
-
-        }*/
+        string url = FrameworkConstants.GetUrl();       
 
         private static IEnumerable<TestCaseData> GetCredentialsDataCsv()
         {
@@ -48,6 +31,8 @@ namespace JolidonTests.Tests
 
         public void BasicAuth(string email, string password)
         {
+            testName = TestContext.CurrentContext.Test.Name;
+            _test = _extent.CreateTest(testName);
             _driver.Navigate().GoToUrl(url + "/customer/account/login/referer/aHR0cHM6Ly9zaG9wLmpvbGlkb24ucm8v/");
             LoginPage lp = new LoginPage(_driver);
             
@@ -55,8 +40,7 @@ namespace JolidonTests.Tests
             Thread.Sleep(1000);
             lp.AcceptCookies();
             lp.Login(email,password);
-            testName = TestContext.CurrentContext.Test.Name;            
-            _test = _extent.CreateTest(testName);
+            
         }
     }
 }

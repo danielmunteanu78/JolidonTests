@@ -28,8 +28,8 @@ namespace JolidonTests.Tests
             var projectPath = new Uri(actualPath).LocalPath;
             Directory.CreateDirectory(projectPath.ToString() + "Reports");
             DateTime time = DateTime.Now;
-            var reportPath = projectPath + "Reports\\report_" + time.ToString("h_mm_ss")+ ".html";
-            var htmlReporter = new ExtentHtmlReporter(reportPath);
+            var reportPath = projectPath + "Reports\\Report_" + time.ToString("h_mm_ss")+ ".html";
+            var htmlReporter = new ExtentV3HtmlReporter(reportPath);
             _extent = new ExtentReports();
             _extent.AttachReporter(htmlReporter);
             _extent.AddSystemInfo("Host Name", Environment.MachineName);
