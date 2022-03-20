@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace JolidonTests.POM
 {
-    public class AddToCartPage : BasePage
+    public class AddToCartPage1 : BasePage
     {
         const string menPageLabel = "#ui-id-5 > span.mm-subcategory-title.underline-megamenu"; // css
         const string menTshirtLabel = "#layer-product-list > div.products.wrapper.grid.products-grid > ol > li:nth-child(1) > div > div.product_image > a > span > span > img"; //css
@@ -21,7 +21,7 @@ namespace JolidonTests.POM
         const string okDeleteButton = "#html-body > div.modals-wrapper > aside.modal-popup.confirm._show > div.modal-inner-wrap > footer > button.action-primary.action-accept";//css
         const string emptyCartMsg = "#minicart-content-wrapper > div.block-content.block-content-quickcart > strong.subtitle.empty.no-items-position";//css
 
-        public AddToCartPage(IWebDriver driver) : base(driver)
+        public AddToCartPage1(IWebDriver driver) : base(driver)
         {
         }
         public void AcceptCookies()
