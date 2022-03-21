@@ -5,6 +5,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -33,14 +34,39 @@ namespace JolidonTests.Tests
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);
-            _driver.Navigate().GoToUrl(url + "/customer/account/login/referer/aHR0cHM6Ly9zaG9wLmpvbGlkb24ucm8v/");
+            _driver.Navigate().GoToUrl(url);
             LoginPage lp = new LoginPage(_driver);
-            
-            Assert.AreEqual("CONECTARE CLIENT", lp.CheckPage());
-            Thread.Sleep(1000);
+            LandingPage ldp = new LandingPage(_driver);
+
+            ldp.LoginNavigate();
+            Assert.AreEqual("CONECTARE CLIENT", lp.CheckPage());            
             lp.AcceptCookies();
-            lp.Login(email,password);
+            lp.Login(email,password);            
+
+            if (email.Length == 0)
+            {
+                Assert.AreEqual("Acesta este un camp obligatoriu.", lp.EmailAdressError());
+            }
+
+            else if (!isValidEmailAdress(email))
+            {
+                Assert.AreEqual("Introduceti o adresa email valida (Ex: johndoe@domain.com).", lp.EmailAdressError());
+            }   
             
+            if (password.Length == 0)
+            {
+                Assert.AreEqual("Acesta este un camp obligatoriu.", lp.PasswordErrorMsg());
+            }
+
+            if(isValidEmailAdress(email)&&password.Length != 0)
+            {
+                Thread.Sleep(1000);
+                Assert.AreEqual("CAPTCHA incorect", lp.AccountLoginErrMsg());
+            }
+        }
+        private bool isValidEmailAdress(string email)
+        {
+            return new EmailAddressAttribute().IsValid(email);
         }
     }
 }

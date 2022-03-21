@@ -17,7 +17,7 @@ namespace JolidonTests.Tests
 
         [Test]
 
-        public void HomeTest()
+        public void HomeTest() // Tests the Home button "JOLIDON"
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);
@@ -29,8 +29,8 @@ namespace JolidonTests.Tests
 
         [Category("Smoke")]
         [Test]
-       // [Parallelizable(ParallelScope.Self)]
-        public void LoginTest()
+       
+        public void LoginTest() // Tests "Autentificare" button
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);
@@ -43,7 +43,7 @@ namespace JolidonTests.Tests
         [Category("Smoke")]
         [Test]       
 
-        public void CreateAccountTest()
+        public void CreateAccountTest() // Tests "Creaza cont" button
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);
@@ -56,21 +56,20 @@ namespace JolidonTests.Tests
         [Category("Smoke")]
         [Test]       
 
-        public void CartTest()
+        public void CartTest() // Tests " Cosul meu" button
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);
             _driver.Navigate().GoToUrl(url);
             LandingPage lp = new LandingPage(_driver);
             lp.AcceptCookies();
-            lp.MyCart();          
+            lp.MyCart();         
 
         }
 
         [Category("Smoke")]
-        [Test]
-       // [Parallelizable(ParallelScope.Self)]
-        public void SearchTest()
+        [Test]       
+        public void SearchTest() // Tests "Cauta" button
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);
@@ -81,8 +80,9 @@ namespace JolidonTests.Tests
         }   
         
         [Test]
-
-        public void AllInOneHPTests()
+        /// This is a tests where all above buttons are tested
+        /// After one button is pressed we return to the manin page
+        public void AllInOneHPTests() 
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);

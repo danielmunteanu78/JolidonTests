@@ -15,9 +15,11 @@ namespace JolidonTests.POM
         const string passwordInput = "#pass"; //css
         const string passwordError = "pass-error"; // id
         const string passwordShowBtn = "show-password"; //id
-        const string passwordRembBtn = "remember_meK3kT0BGMAh"; //id
+        const string passwordAreaButton = "remember-me-box";//id
+        const string passwordRembBtn = "checkbox"; // class
         const string submitButton = "#send2 > span"; // css
         const string cookieAcceptSelector = "#html-body > div.amgdprcookie-bar-template > div > div > div > button.amgdprcookie-button.-allow"; //css
+        const string accountLoginErrorMsg = "#maincontent > div.page.messages > div:nth-child(2) > div > div > div";//css
 
         public LoginPage(IWebDriver driver) : base(driver)
         {
@@ -25,13 +27,27 @@ namespace JolidonTests.POM
 
         public string CheckPage()
         {
-            var authPageEl = driver.FindElement(By.CssSelector(authPageText));
-            return authPageEl.Text;
+            return driver.FindElement(By.CssSelector(authPageText)).Text;            
+        }
+
+        public string EmailAdressError()
+        {
+            return driver.FindElement(By.Id(emailadressError)).Text;
+        }
+
+        public string PasswordErrorMsg()
+        {
+            return driver.FindElement(By.Id(passwordError)).Text;
+        }
+
+        public string AccountLoginErrMsg()
+        {
+            return driver.FindElement(By.CssSelector(accountLoginErrorMsg)).Text;
         }
 
         public void AcceptCookies()
         {
-            driver.FindElement(By.CssSelector(cookieAcceptSelector)).Click();
+           Utils.WaitForElement(driver,1,By.CssSelector(cookieAcceptSelector)).Click();
         }
 
         public void Login(string user, string passw)
@@ -42,6 +58,10 @@ namespace JolidonTests.POM
             var passwordInputElement = driver.FindElement(By.CssSelector(passwordInput));
             passwordInputElement.Clear();
             passwordInputElement.SendKeys(passw);
+            driver.FindElement(By.Id(passwordShowBtn)).Click();
+            var passAreaBtn = driver.FindElement(By.Id(passwordAreaButton));
+            var passRembBtn = passAreaBtn.FindElement(By.ClassName(passwordRembBtn));
+            passRembBtn.Click();
             var submitButtonElement = driver.FindElement(By.CssSelector(submitButton));
             submitButtonElement.Submit();
         }
