@@ -91,13 +91,9 @@ namespace JolidonTests.POM
             passRepeat.SendKeys(pass);
             var showPass = driver.FindElement(By.Id(showPassSelector));
             showPass.Click();
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             var createAccount = driver.FindElement(By.CssSelector(createAccountBtn));
-            createAccount.Submit();
-           /* if (fName.Length == 0)
-            {
-                Assert.AreEqual("Acesta este un camp obligatoriu.", driver.FindElement(By.Id(firstNameErrorSelector)).Text);
-            }*/            
+            createAccount.Submit();              
         }           
        
     }

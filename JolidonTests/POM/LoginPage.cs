@@ -62,8 +62,7 @@ namespace JolidonTests.POM
             var passAreaBtn = driver.FindElement(By.Id(passwordAreaButton));
             var passRembBtn = passAreaBtn.FindElement(By.ClassName(passwordRembBtn));
             passRembBtn.Click();
-            var submitButtonElement = driver.FindElement(By.CssSelector(submitButton));
-            submitButtonElement.Submit();
+            Utils.WaitForElement(driver, 1, By.CssSelector(submitButton)).Submit();            
         }
     }
 }

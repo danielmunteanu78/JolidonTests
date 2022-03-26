@@ -27,8 +27,7 @@ namespace JolidonTests.Tests
         }
 
     [Category("AuthWithDb"),Category("Name")]
-    [Test, TestCaseSource("GetCredentialsDataCsv"), Order(2)]
-    //[Parallelizable(ParallelScope.Self)]
+    [Test, TestCaseSource("GetCredentialsDataCsv")]    
 
         public void BasicAuth(string email, string password)
         {
@@ -43,26 +42,26 @@ namespace JolidonTests.Tests
             lp.AcceptCookies();
             lp.Login(email,password);            
 
-            if (email.Length == 0)
+            if (email.Length == 0) // check if the email field has been filled in
             {
                 Assert.AreEqual("Acesta este un camp obligatoriu.", lp.EmailAdressError());
             }
 
-            else if (!isValidEmailAdress(email))
+            else if (!isValidEmailAdress(email)) // check if the email adress is valid
             {
                 Assert.AreEqual("Introduceti o adresa email valida (Ex: johndoe@domain.com).", lp.EmailAdressError());
             }   
             
-            if (password.Length == 0)
+            if (password.Length == 0) // check if the password field has been filled in
             {
                 Assert.AreEqual("Acesta este un camp obligatoriu.", lp.PasswordErrorMsg());
             }
 
-            if(isValidEmailAdress(email)&&password.Length != 0)
+            /*if(isValidEmailAdress(email)&&password.Length != 0) 
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(200);
                 Assert.AreEqual("CAPTCHA incorect", lp.AccountLoginErrMsg());
-            }
+            }*/
         }
         private bool isValidEmailAdress(string email)
         {

@@ -38,7 +38,7 @@ namespace JolidonTests.POM
         {
             driver.FindElement(By.XPath(womenLabelSelector)).Click();
             Utils.WaitForElement(driver, 2, By.CssSelector(bathingSuitLabelSelector)).Click();
-            driver.FindElement(By.CssSelector(sizeLabelSelecor)).Click();
+            Utils.WaitForElement(driver,2, By.CssSelector(sizeLabelSelecor)).Click();
             driver.FindElement(By.Id(addToCartButtonSelector)).Click();
             Utils.WaitForElement(driver, 2, By.Id(checkoutButtonSelector)).Click();           
         }

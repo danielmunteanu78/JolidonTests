@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace JolidonTests.Tests
 {
@@ -27,20 +28,18 @@ namespace JolidonTests.Tests
             }
         }
 
-        [Category("RegisterWithDb"), Category("Name")]
-        [Test, TestCaseSource("GetCredentialsDataCsv"), Order(1)]
-        //[Parallelizable(ParallelScope.Self)]
+        [Category("RegisterWithDb")]
+        [Test, TestCaseSource("GetCredentialsDataCsv")]        
 
         public void RegisterTest(string firstName, string lastName, string email, string password)
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);
-            _driver.Navigate().GoToUrl(url); // + "/customer/account/create/"
+            _driver.Navigate().GoToUrl(url); 
             LandingPage lp = new LandingPage(_driver);
             RegisterPage rp = new RegisterPage(_driver);
 
-            lp.AcceptCookies();
-            Thread.Sleep(1000);
+            lp.AcceptCookies();            
             lp.CreateAccount();
             Assert.AreEqual("CREAZA CONT CLIENT NOU", rp.CheckPage());
 
@@ -61,24 +60,30 @@ namespace JolidonTests.Tests
             {
                 Assert.AreEqual("Introduceti o adresa email valida (Ex: johndoe@domain.com).", rp.EmailErrMsg());
             }
-            /* else
-             {
-                 Assert.AreEqual("Exista deja un cont înregistrat cu aceasta adresa de email. Daca esti sigur ca este adresa ta de email, click aici pentru a obtine parola si accesarea contului.", rp.DuplicateAccountErrorMsg());
-             }*/
+           
+            string specialCh = @"%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-" + "\"";
+            char[] specialChArray = specialCh.ToCharArray();
+             bool specialChar = true;
+
+            foreach (char ch in specialChArray)
+            {
+                if (password.Contains(ch))
+                    specialChar = true;
+            }
 
             if (password.Length < 8)
             {
                 Assert.AreEqual("Minimum length of this field must be equal or greater than 8 symbols. Leading and trailing spaces will be ignored.", rp.PasswordErrMsg());
             }
 
-            if (Regex.Match(password, @"/[1-9]/", RegexOptions.ECMAScript).Success && Regex.Match(password, @"/[a-z]/", RegexOptions.ECMAScript).Success && Regex.Match(password, @"/[A-Z]/", RegexOptions.ECMAScript).Success && Regex.Match(password, @"/.[!,@,#,$,%,^,&,*,?,_,~,-,£,(,)]/", RegexOptions.ECMAScript).Success)
+            else if (specialChar == true && password.Any(char.IsUpper) && password.Any(char.IsLower)&&password.Any(char.IsDigit))
             {
-                Console.WriteLine("OK!!!");
-            }
+                Console.WriteLine("The password is STRONG !!!");
+            }            
             else
             {
                 Assert.AreEqual("Minimum of different classes of characters in password is 3. Classes of characters: Lower Case, Upper Case, Digits, Special Characters.", rp.PasswordErrMsg());
-            }
+            }            
         }              
         
         private bool isValidEmailAdress(string email)

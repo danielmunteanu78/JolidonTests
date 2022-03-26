@@ -54,7 +54,7 @@ namespace JolidonTests.POM
 
         public string EmptyCartCheck()
         {
-            return driver.FindElement(By.CssSelector(emptyCartMsg)).Text;
+            return Utils.WaitForElement(driver,2,By.CssSelector(emptyCartMsg)).Text;
         }
     }
 }

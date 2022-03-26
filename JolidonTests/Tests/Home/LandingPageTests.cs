@@ -15,7 +15,8 @@ namespace JolidonTests.Tests
 
         string url = FrameworkConstants.GetUrl();
 
-        [Test]
+        [Category("Landing Page")]
+        [Test, Order(1)]
 
         public void HomeTest() // Tests the Home button "JOLIDON"
         {
@@ -27,8 +28,8 @@ namespace JolidonTests.Tests
             hb.HomeButton();
         }
 
-        [Category("Smoke")]
-        [Test]
+        [Category("Landing Page")]
+        [Test, Order(2)]
        
         public void LoginTest() // Tests "Autentificare" button
         {
@@ -40,8 +41,8 @@ namespace JolidonTests.Tests
             lp.LoginNavigate();            
         }
 
-        [Category("Smoke")]
-        [Test]       
+        [Category("Landing Page")]
+        [Test, Order(3)]       
 
         public void CreateAccountTest() // Tests "Creaza cont" button
         {
@@ -53,8 +54,8 @@ namespace JolidonTests.Tests
             lp.CreateAccount();           
         }
 
-        [Category("Smoke")]
-        [Test]       
+        [Category("Landing Page")]
+        [Test, Order(4)]       
 
         public void CartTest() // Tests " Cosul meu" button
         {
@@ -67,8 +68,8 @@ namespace JolidonTests.Tests
 
         }
 
-        [Category("Smoke")]
-        [Test]       
+        [Category("Landing Page")]
+        [Test, Order(5)]       
         public void SearchTest() // Tests "Cauta" button
         {
             testName = TestContext.CurrentContext.Test.Name;
@@ -77,9 +78,10 @@ namespace JolidonTests.Tests
             LandingPage lp = new LandingPage(_driver);
             lp.AcceptCookies();
             lp.SearchPage();            
-        }   
-        
-        [Test]
+        }
+
+        [Category("Landing Page")]
+        [Test, Order(6)]
         /// This is a tests where all above buttons are tested
         /// After one button is pressed we return to the manin page
         public void AllInOneHPTests() 
