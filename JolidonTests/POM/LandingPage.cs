@@ -51,7 +51,7 @@ namespace JolidonTests.POM
         public void SearchPage()
         {
             driver.FindElement(By.CssSelector(searchSelector)).Click();
-            Utils.WaitForElement(driver, 10, By.CssSelector(closeSearchSelector)).Click();
+            Utils.WaitForElement(driver, 2, By.CssSelector(closeSearchSelector)).Click();
         }
     }
 
