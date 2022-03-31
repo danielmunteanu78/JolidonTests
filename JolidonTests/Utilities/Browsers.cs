@@ -41,8 +41,7 @@ namespace JolidonTests.Utilities
                         if (FrameworkConstants.useProxy)
                         {
                             options.Proxy = proxy;
-                        }
-                        //options.AddExtension("C:\\Users\\alex\\Downloads\\extension_4_42_0_0.crx");
+                        }                        
                         return new ChromeDriver(options);
                     }
 
@@ -73,8 +72,7 @@ namespace JolidonTests.Utilities
                 case WebBrowsers.Edge:
                     {
                         var edgeOptions = new EdgeOptions();
-                        //edgeOptions.AddExtension("C:\\Users\\alex\\Downloads\\extension_4_42_0_0.crx");
-                        //edgeOptions.AddArguments("args", "['--start-maximized', '--headless']");
+                        
                         if (FrameworkConstants.startMaximized)
                         {
                             edgeOptions.AddArgument("--start-maximized");

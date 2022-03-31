@@ -58,8 +58,7 @@ namespace JolidonTests.Utilities
                         Console.WriteLine("Found env variable for local");
                         return false;
                     }
-                }
-                //Console.WriteLine("KEY {0}, VALUE {1}", key, Environment.GetEnvironmentVariables()[key]);
+                }                
             }
             Console.WriteLine("No env variable, reading from file");
             return Boolean.Parse(configData["headless"]);
