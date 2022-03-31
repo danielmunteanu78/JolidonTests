@@ -30,8 +30,8 @@ namespace JolidonTests.Tests.Search
             LandingPage lp = new LandingPage(_driver);
             SearchPage sp = new SearchPage(_driver);
             lp.AcceptCookies();
-            //lp.SearchPage();
-            sp.Search(item);
+            lp.SearchPage();            
+            sp.Search(item);           
         }
     }
 }

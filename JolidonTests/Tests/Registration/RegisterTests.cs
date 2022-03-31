@@ -32,15 +32,14 @@ namespace JolidonTests.Tests
         [Test, TestCaseSource("GetCredentialsDataCsv")]        
 
         public void RegisterTest(string firstName, string lastName, string email, string password)
-        {
-            testName = TestContext.CurrentContext.Test.Name;
-            _test = _extent.CreateTest(testName);
+        {            
             _driver.Navigate().GoToUrl(url); 
             LandingPage lp = new LandingPage(_driver);
             RegisterPage rp = new RegisterPage(_driver);
-
             lp.AcceptCookies();            
             lp.CreateAccount();
+            testName = TestContext.CurrentContext.Test.Name;
+            _test = _extent.CreateTest(testName);
             Assert.AreEqual("CREAZA CONT CLIENT NOU", rp.CheckPage());
 
             rp.Register(firstName, lastName, email, password);

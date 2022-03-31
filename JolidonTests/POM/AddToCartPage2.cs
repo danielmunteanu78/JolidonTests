@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Amazon.DynamoDBv2;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -55,7 +56,7 @@ namespace JolidonTests.POM
             var townAreaSel = driver.FindElement(By.CssSelector(townAreaSelector));
             var townFieldSel = townAreaSel.FindElement(By.ClassName(townFieldSelector));
             townFieldSel.Clear();
-            townFieldSel.SendKeys(town);
+            townFieldSel.SendKeys(town);        
             var postCodAreaSel = driver.FindElement(By.CssSelector(postalCodeAreaSelector));
             var postCodFieldSel = postCodAreaSel.FindElement(By.ClassName(postaCodeFieldSelector));
             postCodFieldSel.Clear();

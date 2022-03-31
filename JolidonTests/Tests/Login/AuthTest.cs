@@ -55,13 +55,7 @@ namespace JolidonTests.Tests
             if (password.Length == 0) // check if the password field has been filled in
             {
                 Assert.AreEqual("Acesta este un camp obligatoriu.", lp.PasswordErrorMsg());
-            }
-
-            /*if(isValidEmailAdress(email)&&password.Length != 0) 
-            {
-                Thread.Sleep(200);
-                Assert.AreEqual("CAPTCHA incorect", lp.AccountLoginErrMsg());
-            }*/
+            }            
         }
         private bool isValidEmailAdress(string email)
         {

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace JolidonTests.POM
 {
@@ -17,9 +18,9 @@ namespace JolidonTests.POM
 
         public void Search(string item)
         {
-            Utils.WaitForElement(driver, 2, By.CssSelector(searchIconSelector)).Click();
+            //Utils.WaitForElement(driver, 2, By.CssSelector(searchIconSelector)).Click();
             var searchBarSel = driver.FindElement(By.Id(searchBarSelector));
-            searchBarSel.Clear();
+            searchBarSel.Clear();           
             searchBarSel.SendKeys(item);
             driver.FindElement(By.XPath(searchButtonSelector)).Submit();
         }
