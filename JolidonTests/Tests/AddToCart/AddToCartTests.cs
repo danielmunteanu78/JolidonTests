@@ -9,11 +9,11 @@ using System.Threading;
 namespace JolidonTests.Tests.AddToCart
 {
     class AddToCartTests : BaseTest
-    {
+    {        
         string url = FrameworkConstants.GetUrl();
 
         [Test]
-        [Order(1)]
+        [Order(1), Category("Add to cart")]
         //[Parallelizable(ParallelScope.All)]
     public void AddToCartTest1() // add a product and then delet it from the cart
         {            
@@ -27,7 +27,7 @@ namespace JolidonTests.Tests.AddToCart
         }
 
         [Test]
-        [Order(2)]
+        [Order(2), Category("Add to cart")]
         //[Parallelizable(ParallelScope.All)]
         public void AddToCartTest2() // login to a valid account and adding 1 product to cart
         {           
