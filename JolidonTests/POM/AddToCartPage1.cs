@@ -34,19 +34,12 @@ namespace JolidonTests.POM
             menPgLabel.Click();
             var menTsLabel = driver.FindElement(By.CssSelector(menTshirtLabel));
             menTsLabel.Click();
-            var sizeXLBtn = driver.FindElement(By.Id(sizeXLButton));
+            var sizeXLBtn = Utils.WaitForElement(driver,1, By.Id(sizeXLButton));
             sizeXLBtn.Click();
             var addToCartBtn = driver.FindElement(By.Id(addToCartButton));
-            addToCartBtn.Submit();
-            //Thread.Sleep(500);
-            //var closeCartBtn = Utils.WaitForElement(driver, 10, By.Id(closeCartButton));
-            //closeCartBtn.Click();
-            //Utils.ExecuteJsScript(driver, "document.getElementById('btn-minicart-close').click();");
-            //var myCartSelect = Utils.WaitForElement(driver,10,By.CssSelector(myCartSelector));
-            //myCartSelect.Click();
+            addToCartBtn.Submit();           
             var delBtn = Utils.WaitForElement(driver,2,By.CssSelector(deleteButton));
-             delBtn.Click();
-            //Utils.ExecuteJsScript(driver, "document.getElementBySpan('icon-line-cross').click();");
+             delBtn.Click();          
 
             var okDelBtn = Utils.WaitForElement( driver,2,By.CssSelector(okDeleteButton));
             okDelBtn.Click();

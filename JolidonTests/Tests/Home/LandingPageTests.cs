@@ -93,10 +93,13 @@ namespace JolidonTests.Tests
             lp.AcceptCookies();
             lp.LoginNavigate();
             lp.HomeButton();
+            Thread.Sleep(500);
             lp.CreateAccount();
             lp.HomeButton();
+            Thread.Sleep(500);
             lp.MyCart();
             lp.HomeButton();
+            Thread.Sleep(500);
             lp.SearchPage();
         }
     }
